@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchHeight = 1f;
 
     [Header("Animation")]
-
+    public Animator animator;
 
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
@@ -38,32 +38,38 @@ public class PlayerMovement : MonoBehaviour
         // перевірка, чи на землі
         bool isGrounded = characterController.isGrounded;
         if (isGrounded && moveDirection.y < 0)
-            moveDirection.y = -2f;  // невеликий натиск вниз, щоб не "зависати"
+            moveDirection.y = -2f;
 
-        // рух вперед/вбік
+        // напрямки руху
         Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right   = transform.TransformDirection(Vector3.right);
-        bool isRunning  = Input.GetKey(KeyCode.LeftShift);
-        float speed     = isRunning ? runSpeed : walkSpeed;
+        Vector3 right = transform.TransformDirection(Vector3.right);
 
+        // біг
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float speed = isRunning ? runSpeed : walkSpeed;
+
+        // розрахунок швидкості по осях
         float curSpeedX = speed * Input.GetAxis("Vertical");
         float curSpeedY = speed * Input.GetAxis("Horizontal");
 
         float verticalVel = moveDirection.y;
         moveDirection = forward * curSpeedX + right * curSpeedY;
 
+        // швидкість для анімації (тільки горизонтальна компонента)
+        float animationSpeed = new Vector3(moveDirection.x, 0, moveDirection.z).magnitude;
+        animator.SetFloat("Speed", animationSpeed);
+
+
         // стрибок
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             moveDirection.y = jumpPower;
+            animator.SetTrigger("Jump");
         }
         else
         {
             moveDirection.y = verticalVel;
         }
-
-        // гравітація
-        moveDirection.y -= gravity * Time.deltaTime;
 
         // присідання (R)
         if (Input.GetKey(KeyCode.R))
@@ -79,8 +85,10 @@ public class PlayerMovement : MonoBehaviour
             runSpeed = 16f;
         }
 
-        // виконуємо рух
-        characterController.Move(moveDirection * Time.deltaTime);
+        // гравітація
+        moveDirection.y -= gravity * Time.deltaTime;
 
+        // рух
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 }

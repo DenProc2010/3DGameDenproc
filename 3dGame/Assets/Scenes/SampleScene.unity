@@ -207,12 +207,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13886614}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.029724121, y: 4.363, z: 0.36}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.04142307, y: 0.0032109567, z: 0.003292421, w: 0.99913114}
+  m_LocalPosition: {x: 0.00023857914, y: 0.0012727472, z: 0.0029270295}
+  m_LocalScale: {x: 0.010000002, y: 0.010000003, z: 0.010000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1496843972}
+  m_Father: {fileID: 691410383}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &436521008
 PrefabInstance:
@@ -328,6 +328,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c44bd9bdc114d4a60932c0087d9d1732, type: 3}
+--- !u!4 &691410383 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4409689106761946779, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
+  m_PrefabInstance: {fileID: 1410996271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.92
+      value: 4.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -534,13 +539,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4409689106761946779, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 13886617}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1496843975}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1496843973}
@@ -553,18 +555,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1496843978}
-    - targetCorrespondingSourceObject: {fileID: 8471276682926724903, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1537979641}
+      addedObject: {fileID: 1496843979}
   m_SourcePrefab: {fileID: 100100000, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
 --- !u!1 &1496843970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
-  m_PrefabInstance: {fileID: 1410996271}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1496843972 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
   m_PrefabInstance: {fileID: 1410996271}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1496843973
@@ -583,32 +580,6 @@ MonoBehaviour:
   lookSpeed: 2
   maxUpAngle: 50
   maxDownAngle: 50
---- !u!143 &1496843975
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496843970}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2.34, z: 0}
 --- !u!54 &1496843976
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -634,7 +605,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &1496843977
 Animator:
@@ -674,35 +645,33 @@ MonoBehaviour:
   crouchSpeed: 3
   jumpPower: 6
   gravity: 10
-  defaultHeight: 4.6
+  defaultHeight: 5
   crouchHeight: 1
   animator: {fileID: 1496843977}
---- !u!1 &1537979638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8471276682926724903, guid: 531f86ab401a0f64ea7620cab14e867c, type: 3}
-  m_PrefabInstance: {fileID: 1410996271}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1537979641
-Animator:
-  serializedVersion: 5
+  _jumpForce: 5
+--- !u!136 &1496843979
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537979638}
+  m_GameObject: {fileID: 1496843970}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f21cac53fb5c36449a8878b9cf16d513, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 4.770482
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.402388, z: 0}
 --- !u!1001 &1854085480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -775,7 +744,7 @@ GameObject:
   - component: {fileID: 1896293028}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

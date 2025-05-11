@@ -1,45 +1,42 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Speeds")]
-    public float walkSpeed = 8f;
-    public float runSpeed = 16f;
-    public float crouchSpeed = 3f;
+    [SerializeField] private float walkSpeed = 8f;
+    [SerializeField] private float runSpeed = 16f;
+    [SerializeField] private float crouchSpeed = 3f;
 
     [Header("Jump & Gravity")]
-    public float jumpPower = 6f;
-    public float gravity = 10f;
+    [SerializeField] private float jumpPower = 6f;
+    [SerializeField] private float gravity = 10f;
 
     [Header("Crouch Settings")]
-    public float defaultHeight = 5f;
-    public float crouchHeight = 1f;
+    [SerializeField] private float defaultHeight = 5f;
+    [SerializeField] private float crouchHeight = 1f;
 
     [Header("Animation")]
-    public Animator animator;
+    [SerializeField] private Animator animator;
 
-    private CharacterController characterController;
+    [SerializeField] private float _jumpForce;
+
+    private bool _isGrounded = true;
+
+    private Rigidbody _rb;
+
     private Vector3 moveDirection = Vector3.zero;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-
         // Блокуємо курсор та ховаємо
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // перевірка, чи на землі
-        bool isGrounded = characterController.isGrounded;
-        if (isGrounded && moveDirection.y < 0)
-            moveDirection.y = -2f;
-
         // напрямки руху
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -48,47 +45,39 @@ public class PlayerMovement : MonoBehaviour
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         float speed = isRunning ? runSpeed : walkSpeed;
 
+        // локальний напрям руху
+        Vector3 moveDir = new 
+        (
+            Input.GetAxis("Horizontal"),
+            0,
+            Input.GetAxis("Vertical")
+        );
+
+        // правильний напрям руху в ігровому світі
+        Vector3 transformedDir = transform.TransformDirection(moveDir);
+        _rb.velocity = new(
+            transformedDir.x * speed,
+            _rb.velocity.y,
+            transformedDir.z * speed
+        );
+
         // розрахунок швидкості по осях
-        float curSpeedX = speed * Input.GetAxis("Vertical");
-        float curSpeedY = speed * Input.GetAxis("Horizontal");
+        animator.SetFloat("Speed", _rb.velocity.magnitude);
 
-        float verticalVel = moveDirection.y;
-        moveDirection = forward * curSpeedX + right * curSpeedY;
+        //стрибок
+        if (Input.GetButton("Jump") && _isGrounded) StartCoroutine(nameof(Jump));
+    }
 
-        // швидкість для анімації (тільки горизонтальна компонента)
-        float animationSpeed = new Vector3(moveDirection.x, 0, moveDirection.z).magnitude;
-        animator.SetFloat("Speed", animationSpeed);
+    void OnCollisionEnter(Collision collision)
+    {
+        _isGrounded = collision.gameObject.CompareTag("Ground");
+    }
 
-
-        // стрибок
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            moveDirection.y = jumpPower;
-            animator.SetTrigger("Jump");
-        }
-        else
-        {
-            moveDirection.y = verticalVel;
-        }
-
-        // присідання (R)
-        if (Input.GetKey(KeyCode.R))
-        {
-            characterController.height = crouchHeight;
-            walkSpeed = crouchSpeed;
-            runSpeed = crouchSpeed;
-        }
-        else
-        {
-            characterController.height = defaultHeight;
-            walkSpeed = 8f;
-            runSpeed = 16f;
-        }
-
-        // гравітація
-        moveDirection.y -= gravity * Time.deltaTime;
-
-        // рух
-        characterController.Move(moveDirection * Time.deltaTime);
+    private IEnumerator Jump()
+    {
+        _isGrounded = false;
+        animator.SetTrigger("Jump");
+        yield return new WaitForSeconds(0.2f);
+        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 }

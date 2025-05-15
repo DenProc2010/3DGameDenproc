@@ -19,10 +19,8 @@ public class SelectionManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }       
+        if (Instance != null && Instance != this) Destroy(gameObject);
+        else Instance = this;       
     }
 
     private void Update()

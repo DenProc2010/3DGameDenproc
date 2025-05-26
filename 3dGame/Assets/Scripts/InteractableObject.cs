@@ -2,38 +2,15 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public string ItemName;
-
-    public bool playerInRange;
+    [SerializeField] private string _itemName;
 
     public string GetItemName()
     {
-        return ItemName;
+        return _itemName;
     }
 
-    void OnTriggerEnter(Collider other)
+    public void Interact()
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-
-        }
+        Destroy(gameObject);
     }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && playerInRange && SelectionManager.Instance.onTarget)
-        {
-            Destroy(gameObject);
-        }
-    }
-
 }

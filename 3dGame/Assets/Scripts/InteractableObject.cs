@@ -9,8 +9,12 @@ public class InteractableObject : MonoBehaviour
         return _itemName;
     }
 
-    public void Interact()
+    public void PickUpItem()
     {
-        Destroy(gameObject);
+        if (!InventorySistem.Instance.CheckIfFull())
+        {
+            InventorySistem.Instance.AddToInv(_itemName);
+            Destroy(gameObject);
+        }
     }
 }

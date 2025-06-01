@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float _jumpForce;
 
+
+
     private bool _isGrounded = true;
 
     private Rigidbody _rb;
@@ -29,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // Блокуємо курсор та ховаємо
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Курсор
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         _rb = GetComponent<Rigidbody>();
     }
 
@@ -46,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         float speed = isRunning ? runSpeed : walkSpeed;
 
         // локальний напрям руху
-        Vector3 moveDir = new 
+        Vector3 moveDir = new
         (
             Input.GetAxis("Horizontal"),
             0,

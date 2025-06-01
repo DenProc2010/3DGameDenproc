@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class SelectionManager : MonoBehaviour
 {
     public static SelectionManager Instance { get; private set; }
+    public InteractableObject CurrentTarget { get; private set; }
 
     [SerializeField] private GameObject _interactionUI;
     [SerializeField] private float _rayLength = 3f;
@@ -37,24 +38,26 @@ public class SelectionManager : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * _rayLength, Color.red);
 
-        if (Physics.Raycast(ray, out hit, _rayLength))
+        if (Physics.Raycast(ray, out hit, _rayLength, _interactableLayer))
         {
             InteractableObject interactable = hit.transform.GetComponent<InteractableObject>();
 
             if (interactable != null)
             {
+                CurrentTarget = interactable;
                 _interactionText.text = interactable.GetItemName();
                 _interactionUI.SetActive(true);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    interactable.Interact();
+                    interactable.PickUpItem();
                 }
 
                 return;
             }
         }
 
+        CurrentTarget = null;
         _interactionUI.SetActive(false);
     }
 }
